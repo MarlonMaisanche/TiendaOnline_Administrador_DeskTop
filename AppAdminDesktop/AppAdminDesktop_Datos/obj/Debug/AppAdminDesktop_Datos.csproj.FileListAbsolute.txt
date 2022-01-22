@@ -1,0 +1,14 @@
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Datos\bin\Debug\AppAdminDesktop_Datos.dll
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Datos\bin\Debug\AppAdminDesktop_Datos.pdb
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Datos\bin\Debug\AppAdminDesktop_Entidad.dll
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Datos\bin\Debug\AppAdminDesktop_Entidad.pdb
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Datos\obj\Debug\AppAdminDesktop_Datos.csproj.AssemblyReference.cache
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Datos\obj\Debug\AppAdminDesktop_Datos.csproj.CoreCompileInputs.cache
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Datos\obj\Debug\AppAdminDesktop_Datos.csproj.CopyComplete
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Datos\obj\Debug\AppAdminDesktop_Datos.dll
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Datos\obj\Debug\AppAdminDesktop_Datos.pdb
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Datos\bin\Debug\AppAdminDesktop_Datos.dll.config
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Datos\bin\Debug\EntityFramework.dll
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Datos\bin\Debug\EntityFramework.SqlServer.dll
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Datos\bin\Debug\EntityFramework.xml
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Datos\bin\Debug\EntityFramework.SqlServer.xml

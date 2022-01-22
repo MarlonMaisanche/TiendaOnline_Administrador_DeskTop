@@ -1,0 +1,14 @@
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Negocio\bin\Debug\AppAdminDesktop_Negocio.dll
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Negocio\bin\Debug\AppAdminDesktop_Negocio.pdb
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Negocio\bin\Debug\AppAdminDesktop_Datos.dll
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Negocio\bin\Debug\AppAdminDesktop_Entidad.dll
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Negocio\bin\Debug\AppAdminDesktop_Datos.pdb
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Negocio\bin\Debug\AppAdminDesktop_Entidad.pdb
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Negocio\obj\Debug\AppAdminDesktop_Negocio.csproj.AssemblyReference.cache
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Negocio\obj\Debug\AppAdminDesktop_Negocio.csproj.CoreCompileInputs.cache
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Negocio\obj\Debug\AppAdminDesktop_Negocio.csproj.CopyComplete
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Negocio\obj\Debug\AppAdminDesktop_Negocio.dll
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Negocio\obj\Debug\AppAdminDesktop_Negocio.pdb
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Negocio\bin\Debug\EntityFramework.dll
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Negocio\bin\Debug\AppAdminDesktop_Datos.dll.config
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Negocio\bin\Debug\EntityFramework.xml

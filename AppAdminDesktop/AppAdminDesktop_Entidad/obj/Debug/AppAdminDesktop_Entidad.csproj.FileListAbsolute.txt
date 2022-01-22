@@ -1,0 +1,6 @@
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Entidad\bin\Debug\AppAdminDesktop_Entidad.dll
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Entidad\bin\Debug\AppAdminDesktop_Entidad.pdb
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Entidad\obj\Debug\AppAdminDesktop_Entidad.csproj.CoreCompileInputs.cache
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Entidad\obj\Debug\AppAdminDesktop_Entidad.dll
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Entidad\obj\Debug\AppAdminDesktop_Entidad.pdb
+B:\Norah\AppAdminDestop\AppAdminDesktop\AppAdminDesktop_Entidad\obj\Debug\AppAdminDesktop_Entidad.csproj.AssemblyReference.cache

@@ -1,0 +1,1230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NorahApiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AFILIADOS">
+    <Key>
+      <PropertyRef Name="ID_AFILIADO" />
+    </Key>
+    <Property Name="ID_AFILIADO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_USUARIO_PER" Type="Int32" Nullable="false" />
+    <Property Name="COD_AFILIADO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FECHA_CREACION" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="VENTAS_TOTALES" Type="Int32" />
+    <Property Name="VALOR_COBRAR" Type="Double" />
+    <NavigationProperty Name="USUARIOS" Relationship="Self.FK_AFILIADOS_USUARIOS" FromRole="AFILIADOS" ToRole="USUARIOS" />
+    <NavigationProperty Name="DATOS_BANCARIOS_AFILIADOS" Relationship="Self.FK_DATOS_BANCARIOS_AFILIADOS_AFILIADOS" FromRole="AFILIADOS" ToRole="DATOS_BANCARIOS_AFILIADOS" />
+    <NavigationProperty Name="Ventas" Relationship="Self.FK_VENTAS_ID_CODIGO_AFILIADO" FromRole="AFILIADOS" ToRole="Ventas" />
+  </EntityType>
+  <EntityType Name="CARRITO_COMPRAS">
+    <Key>
+      <PropertyRef Name="ID_CARRITO" />
+    </Key>
+    <Property Name="ID_CARRITO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
+    <Property Name="ID_TALLA_PRO" Type="Int32" Nullable="false" />
+    <Property Name="ID_COLOR_PRO" Type="Int32" Nullable="false" />
+    <Property Name="PRECIO_PRO" Type="Double" Nullable="false" />
+    <Property Name="ID_PRODUCTO" Type="Int32" Nullable="false" />
+    <Property Name="FECHA_CRE" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK_CARRITO_COMPRAS_Productos" FromRole="CARRITO_COMPRAS" ToRole="Productos" />
+    <NavigationProperty Name="USUARIOS" Relationship="Self.FK_CARRITO_COMPRAS_USUARIOS" FromRole="CARRITO_COMPRAS" ToRole="USUARIOS" />
+    <NavigationProperty Name="COLORES_PRODUCTO" Relationship="Self.FK_ID_COLOR_CARRITO" FromRole="CARRITO_COMPRAS" ToRole="COLORES_PRODUCTO" />
+    <NavigationProperty Name="TALLAS_PRODUCTO" Relationship="Self.FK_ID_TALLA" FromRole="CARRITO_COMPRAS" ToRole="TALLAS_PRODUCTO" />
+  </EntityType>
+  <EntityType Name="CATEGORIAS">
+    <Key>
+      <PropertyRef Name="ID_CATEGORIA" />
+    </Key>
+    <Property Name="ID_CATEGORIA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOM_CATEGORIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IMAGEN" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="SUBCATEGORIAS" Relationship="Self.FK_SUBCATEGORIAS_CATEGORIAS" FromRole="CATEGORIAS" ToRole="SUBCATEGORIAS" />
+  </EntityType>
+  <EntityType Name="CIUDADES">
+    <Key>
+      <PropertyRef Name="ID_CIUDAD" />
+    </Key>
+    <Property Name="ID_CIUDAD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_PROVINCIA_PER" Type="Int32" Nullable="false" />
+    <Property Name="NOM_CIUDAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CODIGO_POSTAL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="PROVINCIAS" Relationship="Self.FK_CIUDADES_PROVINCIAS" FromRole="CIUDADES" ToRole="PROVINCIAS" />
+    <NavigationProperty Name="DIRECCIONES" Relationship="Self.FK_DIRECCIONES_CIUDADES" FromRole="CIUDADES" ToRole="DIRECCIONES" />
+  </EntityType>
+  <EntityType Name="COD_DESCUENTO">
+    <Key>
+      <PropertyRef Name="ID_DESCUENTO" />
+    </Key>
+    <Property Name="ID_DESCUENTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="COD_DES" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESCUENTO" Type="Int32" Nullable="false" />
+    <Property Name="CANT_PER_USO" Type="Int32" Nullable="false" />
+    <Property Name="ID_SUBCATEGORIA" Type="Int32" />
+    <NavigationProperty Name="SUBCATEGORIAS" Relationship="Self.FK_COD_DESCUENTO_SUBCATEGORIAS" FromRole="COD_DESCUENTO" ToRole="SUBCATEGORIAS" />
+    <NavigationProperty Name="Ventas" Relationship="Self.FK_VENTAS_ID_CODIGO_DESCUENTO" FromRole="COD_DESCUENTO" ToRole="Ventas" />
+  </EntityType>
+  <EntityType Name="COLECCIONES">
+    <Key>
+      <PropertyRef Name="ID_COLECCION" />
+    </Key>
+    <Property Name="ID_COLECCION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOM_COLECCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DES_COLECCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FECHA_LANZAMIENTO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="DETALLE_COLECCION" Relationship="Self.FK_DETALLE_COLECCION_COLECCIONES" FromRole="COLECCIONES" ToRole="DETALLE_COLECCION" />
+  </EntityType>
+  <EntityType Name="COLORES">
+    <Key>
+      <PropertyRef Name="ID_COLOR" />
+    </Key>
+    <Property Name="ID_COLOR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOM_COLOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="COLORES_PRODUCTO" Relationship="Self.FK_COLORES_PRODUCTO_COLORES" FromRole="COLORES" ToRole="COLORES_PRODUCTO" />
+  </EntityType>
+  <EntityType Name="COLORES_PRODUCTO">
+    <Key>
+      <PropertyRef Name="ID_COL_PRO" />
+    </Key>
+    <Property Name="ID_COL_PRO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_PRO_PER" Type="Int32" Nullable="false" />
+    <Property Name="ID_COLOR" Type="Int32" Nullable="false" />
+    <Property Name="IMAGEN" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CANTIDAD" Type="Int32" />
+    <NavigationProperty Name="CARRITO_COMPRAS" Relationship="Self.FK_ID_COLOR_CARRITO" FromRole="COLORES_PRODUCTO" ToRole="CARRITO_COMPRAS" />
+    <NavigationProperty Name="COLORES" Relationship="Self.FK_COLORES_PRODUCTO_COLORES" FromRole="COLORES_PRODUCTO" ToRole="COLORES" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK_COLORES_PRODUCTO_Productos" FromRole="COLORES_PRODUCTO" ToRole="Productos" />
+    <NavigationProperty Name="DETALLE_VENTA" Relationship="Self.FK_DEATALLE_VENTA_COLORES_PRODUCTO" FromRole="COLORES_PRODUCTO" ToRole="DETALLE_VENTA" />
+  </EntityType>
+  <EntityType Name="CONJUNTO">
+    <Key>
+      <PropertyRef Name="ID_CONJUNTO" />
+    </Key>
+    <Property Name="ID_CONJUNTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOM_CONJUNTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PRECIO_TOTAL" Type="Double" Nullable="false" />
+    <Property Name="PRECIO_PORMO" Type="Double" Nullable="false" />
+    <NavigationProperty Name="DETALLE_CONJUNTO" Relationship="Self.FK_DETALLE_CONJUNTO_CONJUNTO" FromRole="CONJUNTO" ToRole="DETALLE_CONJUNTO" />
+  </EntityType>
+  <EntityType Name="DATOS_BANCARIOS_AFILIADOS">
+    <Key>
+      <PropertyRef Name="ID_DATOS_BANCARIOS" />
+    </Key>
+    <Property Name="ID_DATOS_BANCARIOS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_AFILIADO_PER" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_BANCO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TIPO_DE_CUENTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NOMBRE_CUENTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NUM_CUENTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="AFILIADOS" Relationship="Self.FK_DATOS_BANCARIOS_AFILIADOS_AFILIADOS" FromRole="DATOS_BANCARIOS_AFILIADOS" ToRole="AFILIADOS" />
+  </EntityType>
+  <EntityType Name="DETALLE_COLECCION">
+    <Key>
+      <PropertyRef Name="ID_DETA_COLE" />
+    </Key>
+    <Property Name="ID_DETA_COLE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_COLECCION" Type="Int32" />
+    <Property Name="ID_PRODUCTO" Type="Int32" />
+    <NavigationProperty Name="COLECCIONES" Relationship="Self.FK_DETALLE_COLECCION_COLECCIONES" FromRole="DETALLE_COLECCION" ToRole="COLECCIONES" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK_DETALLE_COLECCION_Productos" FromRole="DETALLE_COLECCION" ToRole="Productos" />
+  </EntityType>
+  <EntityType Name="DETALLE_CONJUNTO">
+    <Key>
+      <PropertyRef Name="ID_DET_CONJ" />
+    </Key>
+    <Property Name="ID_DET_CONJ" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CONJ_PER" Type="Int32" />
+    <Property Name="ID_PRODUCTO" Type="Int32" />
+    <NavigationProperty Name="CONJUNTO" Relationship="Self.FK_DETALLE_CONJUNTO_CONJUNTO" FromRole="DETALLE_CONJUNTO" ToRole="CONJUNTO" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK_DETALLE_CONJUNTO_Productos" FromRole="DETALLE_CONJUNTO" ToRole="Productos" />
+  </EntityType>
+  <EntityType Name="DETALLE_PERSONALIZADO">
+    <Key>
+      <PropertyRef Name="ID_DETALL_PER" />
+    </Key>
+    <Property Name="ID_DETALL_PER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_DETALLE_PER" Type="Int32" Nullable="false" />
+    <Property Name="IMAGEN" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="DETALLES" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DETALLE_VENTA" Relationship="Self.FK_DETALLE_PERSONALIZADO_DEATALLE_VENTA" FromRole="DETALLE_PERSONALIZADO" ToRole="DETALLE_VENTA" />
+  </EntityType>
+  <EntityType Name="DETALLE_REGALO">
+    <Key>
+      <PropertyRef Name="ID_DET_REGALO" />
+    </Key>
+    <Property Name="ID_DET_REGALO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_VENTA_PER" Type="Int32" />
+    <Property Name="DESTINATARIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ID_TIPO_ENVOLTURA" Type="Int32" />
+    <Property Name="MENSAJE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="EXTRA" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TIPO_EMVOLTURA" Relationship="Self.FK_DETALLE_REGALO_TIPO_EMVOLTURA" FromRole="DETALLE_REGALO" ToRole="TIPO_EMVOLTURA" />
+    <NavigationProperty Name="Ventas" Relationship="Self.FK_DETALLE_REGALO_Ventas" FromRole="DETALLE_REGALO" ToRole="Ventas" />
+  </EntityType>
+  <EntityType Name="DETALLE_VENTA">
+    <Key>
+      <PropertyRef Name="ID_DETALLE_VENTA" />
+    </Key>
+    <Property Name="ID_DETALLE_VENTA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_VENTA_PER" Type="Int32" Nullable="false" />
+    <Property Name="ID_PRODUCTO_PER" Type="Int32" Nullable="false" />
+    <Property Name="ID_COLOR_PRO" Type="Int32" Nullable="false" />
+    <Property Name="ID_TALLA_PRO" Type="Int32" Nullable="false" />
+    <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
+    <Property Name="ESTADO" Type="Int32" Nullable="false" />
+    <Property Name="PERSONALIZABLE" Type="Int32" />
+    <NavigationProperty Name="COLORES_PRODUCTO" Relationship="Self.FK_DEATALLE_VENTA_COLORES_PRODUCTO" FromRole="DETALLE_VENTA" ToRole="COLORES_PRODUCTO" />
+    <NavigationProperty Name="DETALLE_PERSONALIZADO" Relationship="Self.FK_DETALLE_PERSONALIZADO_DEATALLE_VENTA" FromRole="DETALLE_VENTA" ToRole="DETALLE_PERSONALIZADO" />
+    <NavigationProperty Name="TALLAS_PRODUCTO" Relationship="Self.FK_DEATALLE_VENTA_TALLAS_PRODUCTO" FromRole="DETALLE_VENTA" ToRole="TALLAS_PRODUCTO" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK_DETALLE_ID_PRODUCTO" FromRole="DETALLE_VENTA" ToRole="Productos" />
+    <NavigationProperty Name="Ventas" Relationship="Self.FK_DETALLE_ID_VENTA" FromRole="DETALLE_VENTA" ToRole="Ventas" />
+  </EntityType>
+  <EntityType Name="DETALLES_PRODUCTO">
+    <Key>
+      <PropertyRef Name="ID_DETALLE" />
+    </Key>
+    <Property Name="ID_DETALLE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_PROD_PER" Type="Int32" Nullable="false" />
+    <Property Name="TITULO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CONTENIDO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK_DETALLES_PRODUCTO_Productos" FromRole="DETALLES_PRODUCTO" ToRole="Productos" />
+  </EntityType>
+  <EntityType Name="DIRECCIONES">
+    <Key>
+      <PropertyRef Name="ID_DIREC" />
+    </Key>
+    <Property Name="ID_DIREC" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_USU_PER" Type="Int32" Nullable="false" />
+    <Property Name="ID_CIUDAD" Type="Int32" />
+    <Property Name="NOM_REC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CEDULA" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="TELEFONO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="CALLE_PRINPICAL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CALLE_SECUNDARIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NUMERO_CASA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="REFERECNIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CODIGO_POS" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="FEC_CRE" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ESTADO" Type="Int32" Nullable="false" />
+    <Property Name="LONGITUD" Type="Double" />
+    <Property Name="LATITUD" Type="Double" />
+    <NavigationProperty Name="CIUDADES" Relationship="Self.FK_DIRECCIONES_CIUDADES" FromRole="DIRECCIONES" ToRole="CIUDADES" />
+    <NavigationProperty Name="USUARIOS" Relationship="Self.FK_DIRECCIONES_USUARIOS" FromRole="DIRECCIONES" ToRole="USUARIOS" />
+    <NavigationProperty Name="USUARIOS1" Relationship="Self.FK_USUARIOS_DIRECCIONES" FromRole="DIRECCIONES" ToRole="USUARIOS" />
+  </EntityType>
+  <EntityType Name="ESTADOS_ENVIOS">
+    <Key>
+      <PropertyRef Name="ID_ESTADO_ENVIO" />
+    </Key>
+    <Property Name="ID_ESTADO_ENVIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ESTADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Ventas" Relationship="Self.FK_Ventas_ESTADOS_ENVIOS" FromRole="ESTADOS_ENVIOS" ToRole="Ventas" />
+  </EntityType>
+  <EntityType Name="ESTADOS_VENTA">
+    <Key>
+      <PropertyRef Name="ID_ESTADO_VENTA" />
+    </Key>
+    <Property Name="ID_ESTADO_VENTA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ESTADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Ventas" Relationship="Self.FK_Ventas_ESTADOS_VENTA" FromRole="ESTADOS_VENTA" ToRole="Ventas" />
+  </EntityType>
+  <EntityType Name="GENERO">
+    <Key>
+      <PropertyRef Name="ID_GENERO" />
+    </Key>
+    <Property Name="ID_GENERO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GENERO1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK_PRODUCTOS_GENERO" FromRole="GENERO" ToRole="Productos" />
+    <NavigationProperty Name="USUARIOS" Relationship="Self.FK_USUARIOS_GENERO" FromRole="GENERO" ToRole="USUARIOS" />
+  </EntityType>
+  <EntityType Name="IMAGENES_PRODUCTO">
+    <Key>
+      <PropertyRef Name="ID_IMAGEN" />
+    </Key>
+    <Property Name="ID_IMAGEN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_PROD_PER" Type="Int32" Nullable="false" />
+    <Property Name="IMAGEN" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK_IMAGENES_PRODUCTO_Productos" FromRole="IMAGENES_PRODUCTO" ToRole="Productos" />
+  </EntityType>
+  <EntityType Name="IMAGENES_RESENA">
+    <Key>
+      <PropertyRef Name="ID_IMA_RES" />
+    </Key>
+    <Property Name="ID_IMA_RES" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_RES_PER" Type="Int32" Nullable="false" />
+    <Property Name="IMAGE" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="RESENAS" Relationship="Self.FK_IMAGENES_RESENA_RESENAS" FromRole="IMAGENES_RESENA" ToRole="RESENAS" />
+  </EntityType>
+  <EntityType Name="LISTA_DESEOS">
+    <Key>
+      <PropertyRef Name="ID_DESEO" />
+    </Key>
+    <Property Name="ID_DESEO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="ID_PRODUCTO" Type="Int32" Nullable="false" />
+    <Property Name="FECHA_CREA" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK_LISTA_DESEOS_Productos" FromRole="LISTA_DESEOS" ToRole="Productos" />
+    <NavigationProperty Name="USUARIOS" Relationship="Self.FK_LISTA_DESEOS_USUARIOS1" FromRole="LISTA_DESEOS" ToRole="USUARIOS" />
+  </EntityType>
+  <EntityType Name="METODOS_PAGO">
+    <Key>
+      <PropertyRef Name="ID_MET_PAG" />
+    </Key>
+    <Property Name="ID_MET_PAG" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="METODO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Ventas" Relationship="Self.FK_Ventas_METODOS_PAGO" FromRole="METODOS_PAGO" ToRole="Ventas" />
+  </EntityType>
+  <EntityType Name="Productos">
+    <Key>
+      <PropertyRef Name="ID_PRO" />
+    </Key>
+    <Property Name="ID_PRO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_TIPO" Type="Int32" Nullable="false" />
+    <Property Name="MARCA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NOM_PRO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SUBTITULO_PRO" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ID_GENERO" Type="Int32" Nullable="false" />
+    <Property Name="PRECIO_PRO" Type="Double" Nullable="false" />
+    <Property Name="PRE_DESCU_PRO" Type="Double" Nullable="false" />
+    <Property Name="COSTO_ENVIO" Type="Double" Nullable="false" />
+    <Property Name="DIAS_TARDA_LLEGAR" Type="Int32" Nullable="false" />
+    <Property Name="STOCK" Type="Int32" Nullable="false" />
+    <Property Name="DESCRIPCION_PRO" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CALIFICACION_PRO" Type="Double" Nullable="false" />
+    <Property Name="ID_SUBCATEGORIA_PER" Type="Int32" Nullable="false" />
+    <Property Name="CANTIDAD_VENDIDA" Type="Int32" Nullable="false" />
+    <Property Name="ESTADO" Type="Int32" Nullable="false" />
+    <Property Name="PERSONALIZABLE" Type="Int32" Nullable="false" />
+    <Property Name="DESCRIP_PERSONALIZABLE" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="ID_SECCION" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CARRITO_COMPRAS" Relationship="Self.FK_CARRITO_COMPRAS_Productos" FromRole="Productos" ToRole="CARRITO_COMPRAS" />
+    <NavigationProperty Name="COLORES_PRODUCTO" Relationship="Self.FK_COLORES_PRODUCTO_Productos" FromRole="Productos" ToRole="COLORES_PRODUCTO" />
+    <NavigationProperty Name="DETALLE_COLECCION" Relationship="Self.FK_DETALLE_COLECCION_Productos" FromRole="Productos" ToRole="DETALLE_COLECCION" />
+    <NavigationProperty Name="DETALLE_CONJUNTO" Relationship="Self.FK_DETALLE_CONJUNTO_Productos" FromRole="Productos" ToRole="DETALLE_CONJUNTO" />
+    <NavigationProperty Name="DETALLE_VENTA" Relationship="Self.FK_DETALLE_ID_PRODUCTO" FromRole="Productos" ToRole="DETALLE_VENTA" />
+    <NavigationProperty Name="DETALLES_PRODUCTO" Relationship="Self.FK_DETALLES_PRODUCTO_Productos" FromRole="Productos" ToRole="DETALLES_PRODUCTO" />
+    <NavigationProperty Name="GENERO" Relationship="Self.FK_PRODUCTOS_GENERO" FromRole="Productos" ToRole="GENERO" />
+    <NavigationProperty Name="IMAGENES_PRODUCTO" Relationship="Self.FK_IMAGENES_PRODUCTO_Productos" FromRole="Productos" ToRole="IMAGENES_PRODUCTO" />
+    <NavigationProperty Name="LISTA_DESEOS" Relationship="Self.FK_LISTA_DESEOS_Productos" FromRole="Productos" ToRole="LISTA_DESEOS" />
+    <NavigationProperty Name="TIPO_PRODUCTO" Relationship="Self.FK__Productos__ID_TI__7CA47C3F" FromRole="Productos" ToRole="TIPO_PRODUCTO" />
+    <NavigationProperty Name="TAGS" Relationship="Self.FK__TAGS__ID_PRO_PER__6A85CC04" FromRole="Productos" ToRole="TAGS" />
+    <NavigationProperty Name="SECCIONES" Relationship="Self.FK_PRODUCTO_SECCION" FromRole="Productos" ToRole="SECCIONES" />
+    <NavigationProperty Name="SUBCATEGORIAS" Relationship="Self.FK_Productos_SUBCATEGORIAS1" FromRole="Productos" ToRole="SUBCATEGORIAS" />
+    <NavigationProperty Name="RESENAS" Relationship="Self.FK_RESENAS_Productos" FromRole="Productos" ToRole="RESENAS" />
+    <NavigationProperty Name="TALLAS_PRODUCTO" Relationship="Self.FK_TALLAS_PRODUCTO_Productos" FromRole="Productos" ToRole="TALLAS_PRODUCTO" />
+  </EntityType>
+  <EntityType Name="PROVINCIAS">
+    <Key>
+      <PropertyRef Name="ID_PROVINCIA" />
+    </Key>
+    <Property Name="ID_PROVINCIA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOM_PRO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CIUDADES" Relationship="Self.FK_CIUDADES_PROVINCIAS" FromRole="PROVINCIAS" ToRole="CIUDADES" />
+  </EntityType>
+  <EntityType Name="RESENAS">
+    <Key>
+      <PropertyRef Name="ID_RESE" />
+    </Key>
+    <Property Name="ID_RESE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_PROD_PER" Type="Int32" Nullable="false" />
+    <Property Name="ID_USU_ESCR" Type="Int32" Nullable="false" />
+    <Property Name="TITULO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="VALORACION" Type="Double" Nullable="false" />
+    <Property Name="COMENTARIO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ESTADO" Type="Int32" />
+    <Property Name="FECHA" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="IMAGENES_RESENA" Relationship="Self.FK_IMAGENES_RESENA_RESENAS" FromRole="RESENAS" ToRole="IMAGENES_RESENA" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK_RESENAS_Productos" FromRole="RESENAS" ToRole="Productos" />
+    <NavigationProperty Name="USUARIOS" Relationship="Self.FK_RESENAS_USUARIOS" FromRole="RESENAS" ToRole="USUARIOS" />
+  </EntityType>
+  <EntityType Name="SUBCATEGORIAS">
+    <Key>
+      <PropertyRef Name="ID_SUBCAT" />
+    </Key>
+    <Property Name="ID_SUBCAT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CATEGO_PER" Type="Int32" Nullable="false" />
+    <Property Name="NOM_SUBCATEGO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESC_SUBCATEGO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IMAGEN" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CATEGORIAS" Relationship="Self.FK_SUBCATEGORIAS_CATEGORIAS" FromRole="SUBCATEGORIAS" ToRole="CATEGORIAS" />
+    <NavigationProperty Name="COD_DESCUENTO" Relationship="Self.FK_COD_DESCUENTO_SUBCATEGORIAS" FromRole="SUBCATEGORIAS" ToRole="COD_DESCUENTO" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK_Productos_SUBCATEGORIAS1" FromRole="SUBCATEGORIAS" ToRole="Productos" />
+  </EntityType>
+  <EntityType Name="TALLAS">
+    <Key>
+      <PropertyRef Name="ID_TALLA" />
+    </Key>
+    <Property Name="ID_TALLA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOM_TALLA" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="TALLAS_PRODUCTO" Relationship="Self.FK_TALLAS_PRODUCTO_TALLAS" FromRole="TALLAS" ToRole="TALLAS_PRODUCTO" />
+  </EntityType>
+  <EntityType Name="TALLAS_PRODUCTO">
+    <Key>
+      <PropertyRef Name="ID_TALL_PRO" />
+    </Key>
+    <Property Name="ID_TALL_PRO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_PRO_PER" Type="Int32" Nullable="false" />
+    <Property Name="ID_TALLA_PER" Type="Int32" Nullable="false" />
+    <Property Name="PRECIO_TALL" Type="Double" />
+    <Property Name="PRECIO_TALL_PROM" Type="Double" />
+    <Property Name="CANTIDAD" Type="Int32" />
+    <NavigationProperty Name="CARRITO_COMPRAS" Relationship="Self.FK_ID_TALLA" FromRole="TALLAS_PRODUCTO" ToRole="CARRITO_COMPRAS" />
+    <NavigationProperty Name="DETALLE_VENTA" Relationship="Self.FK_DEATALLE_VENTA_TALLAS_PRODUCTO" FromRole="TALLAS_PRODUCTO" ToRole="DETALLE_VENTA" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK_TALLAS_PRODUCTO_Productos" FromRole="TALLAS_PRODUCTO" ToRole="Productos" />
+    <NavigationProperty Name="TALLAS" Relationship="Self.FK_TALLAS_PRODUCTO_TALLAS" FromRole="TALLAS_PRODUCTO" ToRole="TALLAS" />
+  </EntityType>
+  <EntityType Name="TIPO_EMVOLTURA">
+    <Key>
+      <PropertyRef Name="ID_TIPO_ENVOLTURA" />
+    </Key>
+    <Property Name="ID_TIPO_ENVOLTURA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IMAGEN" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="DETALLE_REGALO" Relationship="Self.FK_DETALLE_REGALO_TIPO_EMVOLTURA" FromRole="TIPO_EMVOLTURA" ToRole="DETALLE_REGALO" />
+  </EntityType>
+  <EntityType Name="USUARIOS">
+    <Key>
+      <PropertyRef Name="ID_USUARIO" />
+    </Key>
+    <Property Name="ID_USUARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PASS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NOMBRE" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="APELLIDO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CEDULA" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="ID_GENERO" Type="Int32" />
+    <Property Name="TELEFONO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="ID_DIR_PRI" Type="Int32" />
+    <Property Name="VAL_USU" Type="Double" />
+    <Property Name="FEC_CREA" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ESTADO" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AFILIADOS" Relationship="Self.FK_AFILIADOS_USUARIOS" FromRole="USUARIOS" ToRole="AFILIADOS" />
+    <NavigationProperty Name="CARRITO_COMPRAS" Relationship="Self.FK_CARRITO_COMPRAS_USUARIOS" FromRole="USUARIOS" ToRole="CARRITO_COMPRAS" />
+    <NavigationProperty Name="DIRECCIONES" Relationship="Self.FK_DIRECCIONES_USUARIOS" FromRole="USUARIOS" ToRole="DIRECCIONES" />
+    <NavigationProperty Name="DIRECCIONES1" Relationship="Self.FK_USUARIOS_DIRECCIONES" FromRole="USUARIOS" ToRole="DIRECCIONES" />
+    <NavigationProperty Name="GENERO" Relationship="Self.FK_USUARIOS_GENERO" FromRole="USUARIOS" ToRole="GENERO" />
+    <NavigationProperty Name="LISTA_DESEOS" Relationship="Self.FK_LISTA_DESEOS_USUARIOS1" FromRole="USUARIOS" ToRole="LISTA_DESEOS" />
+    <NavigationProperty Name="RESENAS" Relationship="Self.FK_RESENAS_USUARIOS" FromRole="USUARIOS" ToRole="RESENAS" />
+  </EntityType>
+  <EntityType Name="Ventas">
+    <Key>
+      <PropertyRef Name="ID_VENTA" />
+    </Key>
+    <Property Name="ID_VENTA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FECHA_VENTA" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MONTO" Type="Double" Nullable="false" />
+    <Property Name="IVA" Type="Double" Nullable="false" />
+    <Property Name="DIAS_TARDA" Type="Int32" Nullable="false" />
+    <Property Name="COSTO_ENVIO" Type="Double" Nullable="false" />
+    <Property Name="ID_ESTADO_ENVIO" Type="Int32" Nullable="false" />
+    <Property Name="ID_DIRECCION" Type="Int32" Nullable="false" />
+    <Property Name="ID_USURIO" Type="Int32" Nullable="false" />
+    <Property Name="ID_ESTADO_VENTA" Type="Int32" Nullable="false" />
+    <Property Name="ID_METODO_PAGO" Type="Int32" Nullable="false" />
+    <Property Name="SATISFACION" Type="Double" Nullable="false" />
+    <Property Name="OBSERVACIONES" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="COMO_REGALO" Type="Int32" Nullable="false" />
+    <Property Name="ID_COD_DES" Type="Int32" />
+    <Property Name="ID_COD_AFILIADO" Type="Int32" />
+    <Property Name="CODIGO_RASTREO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ESTADO" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AFILIADOS" Relationship="Self.FK_VENTAS_ID_CODIGO_AFILIADO" FromRole="Ventas" ToRole="AFILIADOS" />
+    <NavigationProperty Name="COD_DESCUENTO" Relationship="Self.FK_VENTAS_ID_CODIGO_DESCUENTO" FromRole="Ventas" ToRole="COD_DESCUENTO" />
+    <NavigationProperty Name="DETALLE_REGALO" Relationship="Self.FK_DETALLE_REGALO_Ventas" FromRole="Ventas" ToRole="DETALLE_REGALO" />
+    <NavigationProperty Name="DETALLE_VENTA" Relationship="Self.FK_DETALLE_ID_VENTA" FromRole="Ventas" ToRole="DETALLE_VENTA" />
+    <NavigationProperty Name="ESTADOS_ENVIOS" Relationship="Self.FK_Ventas_ESTADOS_ENVIOS" FromRole="Ventas" ToRole="ESTADOS_ENVIOS" />
+    <NavigationProperty Name="ESTADOS_VENTA" Relationship="Self.FK_Ventas_ESTADOS_VENTA" FromRole="Ventas" ToRole="ESTADOS_VENTA" />
+    <NavigationProperty Name="METODOS_PAGO" Relationship="Self.FK_Ventas_METODOS_PAGO" FromRole="Ventas" ToRole="METODOS_PAGO" />
+  </EntityType>
+  <EntityType Name="PORTADA">
+    <Key>
+      <PropertyRef Name="ID_IMG_POR" />
+    </Key>
+    <Property Name="ID_IMG_POR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IMG" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SECCIONES">
+    <Key>
+      <PropertyRef Name="ID_SECCION" />
+    </Key>
+    <Property Name="ID_SECCION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE_SECCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK_PRODUCTO_SECCION" FromRole="SECCIONES" ToRole="Productos" />
+  </EntityType>
+  <EntityType Name="TAGS">
+    <Key>
+      <PropertyRef Name="ID_TAG" />
+    </Key>
+    <Property Name="ID_TAG" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_PRO_PER" Type="Int32" Nullable="false" />
+    <Property Name="TAG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK__TAGS__ID_PRO_PER__6A85CC04" FromRole="TAGS" ToRole="Productos" />
+  </EntityType>
+  <EntityType Name="TIPO_PRODUCTO">
+    <Key>
+      <PropertyRef Name="ID_TIPO_PRODUCTO" />
+    </Key>
+    <Property Name="ID_TIPO_PRODUCTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE_TIPO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK__Productos__ID_TI__7CA47C3F" FromRole="TIPO_PRODUCTO" ToRole="Productos" />
+  </EntityType>
+  <Association Name="FK_AFILIADOS_USUARIOS">
+    <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+    <End Role="AFILIADOS" Type="Self.AFILIADOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIOS">
+        <PropertyRef Name="ID_USUARIO" />
+      </Principal>
+      <Dependent Role="AFILIADOS">
+        <PropertyRef Name="ID_USUARIO_PER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOS_BANCARIOS_AFILIADOS_AFILIADOS">
+    <End Role="AFILIADOS" Type="Self.AFILIADOS" Multiplicity="1" />
+    <End Role="DATOS_BANCARIOS_AFILIADOS" Type="Self.DATOS_BANCARIOS_AFILIADOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AFILIADOS">
+        <PropertyRef Name="ID_AFILIADO" />
+      </Principal>
+      <Dependent Role="DATOS_BANCARIOS_AFILIADOS">
+        <PropertyRef Name="ID_AFILIADO_PER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VENTAS_ID_CODIGO_AFILIADO">
+    <End Role="AFILIADOS" Type="Self.AFILIADOS" Multiplicity="0..1" />
+    <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AFILIADOS">
+        <PropertyRef Name="ID_AFILIADO" />
+      </Principal>
+      <Dependent Role="Ventas">
+        <PropertyRef Name="ID_COD_AFILIADO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CARRITO_COMPRAS_Productos">
+    <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+    <End Role="CARRITO_COMPRAS" Type="Self.CARRITO_COMPRAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Productos">
+        <PropertyRef Name="ID_PRO" />
+      </Principal>
+      <Dependent Role="CARRITO_COMPRAS">
+        <PropertyRef Name="ID_PRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CARRITO_COMPRAS_USUARIOS">
+    <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+    <End Role="CARRITO_COMPRAS" Type="Self.CARRITO_COMPRAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIOS">
+        <PropertyRef Name="ID_USUARIO" />
+      </Principal>
+      <Dependent Role="CARRITO_COMPRAS">
+        <PropertyRef Name="ID_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ID_COLOR_CARRITO">
+    <End Role="COLORES_PRODUCTO" Type="Self.COLORES_PRODUCTO" Multiplicity="1" />
+    <End Role="CARRITO_COMPRAS" Type="Self.CARRITO_COMPRAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COLORES_PRODUCTO">
+        <PropertyRef Name="ID_COL_PRO" />
+      </Principal>
+      <Dependent Role="CARRITO_COMPRAS">
+        <PropertyRef Name="ID_COLOR_PRO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ID_TALLA">
+    <End Role="TALLAS_PRODUCTO" Type="Self.TALLAS_PRODUCTO" Multiplicity="1" />
+    <End Role="CARRITO_COMPRAS" Type="Self.CARRITO_COMPRAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TALLAS_PRODUCTO">
+        <PropertyRef Name="ID_TALL_PRO" />
+      </Principal>
+      <Dependent Role="CARRITO_COMPRAS">
+        <PropertyRef Name="ID_TALLA_PRO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SUBCATEGORIAS_CATEGORIAS">
+    <End Role="CATEGORIAS" Type="Self.CATEGORIAS" Multiplicity="1" />
+    <End Role="SUBCATEGORIAS" Type="Self.SUBCATEGORIAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORIAS">
+        <PropertyRef Name="ID_CATEGORIA" />
+      </Principal>
+      <Dependent Role="SUBCATEGORIAS">
+        <PropertyRef Name="ID_CATEGO_PER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CIUDADES_PROVINCIAS">
+    <End Role="PROVINCIAS" Type="Self.PROVINCIAS" Multiplicity="1" />
+    <End Role="CIUDADES" Type="Self.CIUDADES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVINCIAS">
+        <PropertyRef Name="ID_PROVINCIA" />
+      </Principal>
+      <Dependent Role="CIUDADES">
+        <PropertyRef Name="ID_PROVINCIA_PER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DIRECCIONES_CIUDADES">
+    <End Role="CIUDADES" Type="Self.CIUDADES" Multiplicity="0..1" />
+    <End Role="DIRECCIONES" Type="Self.DIRECCIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CIUDADES">
+        <PropertyRef Name="ID_CIUDAD" />
+      </Principal>
+      <Dependent Role="DIRECCIONES">
+        <PropertyRef Name="ID_CIUDAD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COD_DESCUENTO_SUBCATEGORIAS">
+    <End Role="SUBCATEGORIAS" Type="Self.SUBCATEGORIAS" Multiplicity="0..1" />
+    <End Role="COD_DESCUENTO" Type="Self.COD_DESCUENTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUBCATEGORIAS">
+        <PropertyRef Name="ID_SUBCAT" />
+      </Principal>
+      <Dependent Role="COD_DESCUENTO">
+        <PropertyRef Name="ID_SUBCATEGORIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VENTAS_ID_CODIGO_DESCUENTO">
+    <End Role="COD_DESCUENTO" Type="Self.COD_DESCUENTO" Multiplicity="0..1" />
+    <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COD_DESCUENTO">
+        <PropertyRef Name="ID_DESCUENTO" />
+      </Principal>
+      <Dependent Role="Ventas">
+        <PropertyRef Name="ID_COD_DES" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DETALLE_COLECCION_COLECCIONES">
+    <End Role="COLECCIONES" Type="Self.COLECCIONES" Multiplicity="0..1" />
+    <End Role="DETALLE_COLECCION" Type="Self.DETALLE_COLECCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COLECCIONES">
+        <PropertyRef Name="ID_COLECCION" />
+      </Principal>
+      <Dependent Role="DETALLE_COLECCION">
+        <PropertyRef Name="ID_COLECCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COLORES_PRODUCTO_COLORES">
+    <End Role="COLORES" Type="Self.COLORES" Multiplicity="1" />
+    <End Role="COLORES_PRODUCTO" Type="Self.COLORES_PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COLORES">
+        <PropertyRef Name="ID_COLOR" />
+      </Principal>
+      <Dependent Role="COLORES_PRODUCTO">
+        <PropertyRef Name="ID_COLOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COLORES_PRODUCTO_Productos">
+    <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+    <End Role="COLORES_PRODUCTO" Type="Self.COLORES_PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Productos">
+        <PropertyRef Name="ID_PRO" />
+      </Principal>
+      <Dependent Role="COLORES_PRODUCTO">
+        <PropertyRef Name="ID_PRO_PER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DEATALLE_VENTA_COLORES_PRODUCTO">
+    <End Role="COLORES_PRODUCTO" Type="Self.COLORES_PRODUCTO" Multiplicity="1" />
+    <End Role="DETALLE_VENTA" Type="Self.DETALLE_VENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COLORES_PRODUCTO">
+        <PropertyRef Name="ID_COL_PRO" />
+      </Principal>
+      <Dependent Role="DETALLE_VENTA">
+        <PropertyRef Name="ID_COLOR_PRO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DETALLE_CONJUNTO_CONJUNTO">
+    <End Role="CONJUNTO" Type="Self.CONJUNTO" Multiplicity="0..1" />
+    <End Role="DETALLE_CONJUNTO" Type="Self.DETALLE_CONJUNTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CONJUNTO">
+        <PropertyRef Name="ID_CONJUNTO" />
+      </Principal>
+      <Dependent Role="DETALLE_CONJUNTO">
+        <PropertyRef Name="ID_CONJ_PER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DETALLE_COLECCION_Productos">
+    <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+    <End Role="DETALLE_COLECCION" Type="Self.DETALLE_COLECCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Productos">
+        <PropertyRef Name="ID_PRO" />
+      </Principal>
+      <Dependent Role="DETALLE_COLECCION">
+        <PropertyRef Name="ID_PRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DETALLE_CONJUNTO_Productos">
+    <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+    <End Role="DETALLE_CONJUNTO" Type="Self.DETALLE_CONJUNTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Productos">
+        <PropertyRef Name="ID_PRO" />
+      </Principal>
+      <Dependent Role="DETALLE_CONJUNTO">
+        <PropertyRef Name="ID_PRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DETALLE_PERSONALIZADO_DEATALLE_VENTA">
+    <End Role="DETALLE_VENTA" Type="Self.DETALLE_VENTA" Multiplicity="1" />
+    <End Role="DETALLE_PERSONALIZADO" Type="Self.DETALLE_PERSONALIZADO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DETALLE_VENTA">
+        <PropertyRef Name="ID_DETALLE_VENTA" />
+      </Principal>
+      <Dependent Role="DETALLE_PERSONALIZADO">
+        <PropertyRef Name="ID_DETALLE_PER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DETALLE_REGALO_TIPO_EMVOLTURA">
+    <End Role="TIPO_EMVOLTURA" Type="Self.TIPO_EMVOLTURA" Multiplicity="0..1" />
+    <End Role="DETALLE_REGALO" Type="Self.DETALLE_REGALO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPO_EMVOLTURA">
+        <PropertyRef Name="ID_TIPO_ENVOLTURA" />
+      </Principal>
+      <Dependent Role="DETALLE_REGALO">
+        <PropertyRef Name="ID_TIPO_ENVOLTURA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DETALLE_REGALO_Ventas">
+    <End Role="Ventas" Type="Self.Ventas" Multiplicity="0..1" />
+    <End Role="DETALLE_REGALO" Type="Self.DETALLE_REGALO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ventas">
+        <PropertyRef Name="ID_VENTA" />
+      </Principal>
+      <Dependent Role="DETALLE_REGALO">
+        <PropertyRef Name="ID_VENTA_PER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DEATALLE_VENTA_TALLAS_PRODUCTO">
+    <End Role="TALLAS_PRODUCTO" Type="Self.TALLAS_PRODUCTO" Multiplicity="1" />
+    <End Role="DETALLE_VENTA" Type="Self.DETALLE_VENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TALLAS_PRODUCTO">
+        <PropertyRef Name="ID_TALL_PRO" />
+      </Principal>
+      <Dependent Role="DETALLE_VENTA">
+        <PropertyRef Name="ID_TALLA_PRO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DETALLE_ID_PRODUCTO">
+    <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+    <End Role="DETALLE_VENTA" Type="Self.DETALLE_VENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Productos">
+        <PropertyRef Name="ID_PRO" />
+      </Principal>
+      <Dependent Role="DETALLE_VENTA">
+        <PropertyRef Name="ID_PRODUCTO_PER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DETALLE_ID_VENTA">
+    <End Role="Ventas" Type="Self.Ventas" Multiplicity="1" />
+    <End Role="DETALLE_VENTA" Type="Self.DETALLE_VENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ventas">
+        <PropertyRef Name="ID_VENTA" />
+      </Principal>
+      <Dependent Role="DETALLE_VENTA">
+        <PropertyRef Name="ID_VENTA_PER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DETALLES_PRODUCTO_Productos">
+    <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+    <End Role="DETALLES_PRODUCTO" Type="Self.DETALLES_PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Productos">
+        <PropertyRef Name="ID_PRO" />
+      </Principal>
+      <Dependent Role="DETALLES_PRODUCTO">
+        <PropertyRef Name="ID_PROD_PER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DIRECCIONES_USUARIOS">
+    <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+    <End Role="DIRECCIONES" Type="Self.DIRECCIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIOS">
+        <PropertyRef Name="ID_USUARIO" />
+      </Principal>
+      <Dependent Role="DIRECCIONES">
+        <PropertyRef Name="ID_USU_PER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USUARIOS_DIRECCIONES">
+    <End Role="DIRECCIONES" Type="Self.DIRECCIONES" Multiplicity="0..1" />
+    <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DIRECCIONES">
+        <PropertyRef Name="ID_DIREC" />
+      </Principal>
+      <Dependent Role="USUARIOS">
+        <PropertyRef Name="ID_DIR_PRI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ventas_ESTADOS_ENVIOS">
+    <End Role="ESTADOS_ENVIOS" Type="Self.ESTADOS_ENVIOS" Multiplicity="1" />
+    <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADOS_ENVIOS">
+        <PropertyRef Name="ID_ESTADO_ENVIO" />
+      </Principal>
+      <Dependent Role="Ventas">
+        <PropertyRef Name="ID_ESTADO_ENVIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ventas_ESTADOS_VENTA">
+    <End Role="ESTADOS_VENTA" Type="Self.ESTADOS_VENTA" Multiplicity="1" />
+    <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADOS_VENTA">
+        <PropertyRef Name="ID_ESTADO_VENTA" />
+      </Principal>
+      <Dependent Role="Ventas">
+        <PropertyRef Name="ID_ESTADO_VENTA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRODUCTOS_GENERO">
+    <End Role="GENERO" Type="Self.GENERO" Multiplicity="1" />
+    <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GENERO">
+        <PropertyRef Name="ID_GENERO" />
+      </Principal>
+      <Dependent Role="Productos">
+        <PropertyRef Name="ID_GENERO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USUARIOS_GENERO">
+    <End Role="GENERO" Type="Self.GENERO" Multiplicity="0..1" />
+    <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GENERO">
+        <PropertyRef Name="ID_GENERO" />
+      </Principal>
+      <Dependent Role="USUARIOS">
+        <PropertyRef Name="ID_GENERO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IMAGENES_PRODUCTO_Productos">
+    <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+    <End Role="IMAGENES_PRODUCTO" Type="Self.IMAGENES_PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Productos">
+        <PropertyRef Name="ID_PRO" />
+      </Principal>
+      <Dependent Role="IMAGENES_PRODUCTO">
+        <PropertyRef Name="ID_PROD_PER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IMAGENES_RESENA_RESENAS">
+    <End Role="RESENAS" Type="Self.RESENAS" Multiplicity="1" />
+    <End Role="IMAGENES_RESENA" Type="Self.IMAGENES_RESENA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RESENAS">
+        <PropertyRef Name="ID_RESE" />
+      </Principal>
+      <Dependent Role="IMAGENES_RESENA">
+        <PropertyRef Name="ID_RES_PER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LISTA_DESEOS_Productos">
+    <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+    <End Role="LISTA_DESEOS" Type="Self.LISTA_DESEOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Productos">
+        <PropertyRef Name="ID_PRO" />
+      </Principal>
+      <Dependent Role="LISTA_DESEOS">
+        <PropertyRef Name="ID_PRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LISTA_DESEOS_USUARIOS1">
+    <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+    <End Role="LISTA_DESEOS" Type="Self.LISTA_DESEOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIOS">
+        <PropertyRef Name="ID_USUARIO" />
+      </Principal>
+      <Dependent Role="LISTA_DESEOS">
+        <PropertyRef Name="ID_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ventas_METODOS_PAGO">
+    <End Role="METODOS_PAGO" Type="Self.METODOS_PAGO" Multiplicity="1" />
+    <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="METODOS_PAGO">
+        <PropertyRef Name="ID_MET_PAG" />
+      </Principal>
+      <Dependent Role="Ventas">
+        <PropertyRef Name="ID_METODO_PAGO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Productos__ID_TI__7CA47C3F">
+    <End Role="TIPO_PRODUCTO" Type="Self.TIPO_PRODUCTO" Multiplicity="1" />
+    <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPO_PRODUCTO">
+        <PropertyRef Name="ID_TIPO_PRODUCTO" />
+      </Principal>
+      <Dependent Role="Productos">
+        <PropertyRef Name="ID_TIPO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TAGS__ID_PRO_PER__6A85CC04">
+    <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+    <End Role="TAGS" Type="Self.TAGS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Productos">
+        <PropertyRef Name="ID_PRO" />
+      </Principal>
+      <Dependent Role="TAGS">
+        <PropertyRef Name="ID_PRO_PER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRODUCTO_SECCION">
+    <End Role="SECCIONES" Type="Self.SECCIONES" Multiplicity="1" />
+    <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SECCIONES">
+        <PropertyRef Name="ID_SECCION" />
+      </Principal>
+      <Dependent Role="Productos">
+        <PropertyRef Name="ID_SECCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Productos_SUBCATEGORIAS1">
+    <End Role="SUBCATEGORIAS" Type="Self.SUBCATEGORIAS" Multiplicity="1" />
+    <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUBCATEGORIAS">
+        <PropertyRef Name="ID_SUBCAT" />
+      </Principal>
+      <Dependent Role="Productos">
+        <PropertyRef Name="ID_SUBCATEGORIA_PER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RESENAS_Productos">
+    <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+    <End Role="RESENAS" Type="Self.RESENAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Productos">
+        <PropertyRef Name="ID_PRO" />
+      </Principal>
+      <Dependent Role="RESENAS">
+        <PropertyRef Name="ID_PROD_PER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TALLAS_PRODUCTO_Productos">
+    <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+    <End Role="TALLAS_PRODUCTO" Type="Self.TALLAS_PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Productos">
+        <PropertyRef Name="ID_PRO" />
+      </Principal>
+      <Dependent Role="TALLAS_PRODUCTO">
+        <PropertyRef Name="ID_PRO_PER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RESENAS_USUARIOS">
+    <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+    <End Role="RESENAS" Type="Self.RESENAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIOS">
+        <PropertyRef Name="ID_USUARIO" />
+      </Principal>
+      <Dependent Role="RESENAS">
+        <PropertyRef Name="ID_USU_ESCR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TALLAS_PRODUCTO_TALLAS">
+    <End Role="TALLAS" Type="Self.TALLAS" Multiplicity="1" />
+    <End Role="TALLAS_PRODUCTO" Type="Self.TALLAS_PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TALLAS">
+        <PropertyRef Name="ID_TALLA" />
+      </Principal>
+      <Dependent Role="TALLAS_PRODUCTO">
+        <PropertyRef Name="ID_TALLA_PER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NorahApiEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AFILIADOS" EntityType="Self.AFILIADOS" />
+    <EntitySet Name="CARRITO_COMPRAS" EntityType="Self.CARRITO_COMPRAS" />
+    <EntitySet Name="CATEGORIAS" EntityType="Self.CATEGORIAS" />
+    <EntitySet Name="CIUDADES" EntityType="Self.CIUDADES" />
+    <EntitySet Name="COD_DESCUENTO" EntityType="Self.COD_DESCUENTO" />
+    <EntitySet Name="COLECCIONES" EntityType="Self.COLECCIONES" />
+    <EntitySet Name="COLORES" EntityType="Self.COLORES" />
+    <EntitySet Name="COLORES_PRODUCTO" EntityType="Self.COLORES_PRODUCTO" />
+    <EntitySet Name="CONJUNTO" EntityType="Self.CONJUNTO" />
+    <EntitySet Name="DATOS_BANCARIOS_AFILIADOS" EntityType="Self.DATOS_BANCARIOS_AFILIADOS" />
+    <EntitySet Name="DETALLE_COLECCION" EntityType="Self.DETALLE_COLECCION" />
+    <EntitySet Name="DETALLE_CONJUNTO" EntityType="Self.DETALLE_CONJUNTO" />
+    <EntitySet Name="DETALLE_PERSONALIZADO" EntityType="Self.DETALLE_PERSONALIZADO" />
+    <EntitySet Name="DETALLE_REGALO" EntityType="Self.DETALLE_REGALO" />
+    <EntitySet Name="DETALLE_VENTA" EntityType="Self.DETALLE_VENTA" />
+    <EntitySet Name="DETALLES_PRODUCTO" EntityType="Self.DETALLES_PRODUCTO" />
+    <EntitySet Name="DIRECCIONES" EntityType="Self.DIRECCIONES" />
+    <EntitySet Name="ESTADOS_ENVIOS" EntityType="Self.ESTADOS_ENVIOS" />
+    <EntitySet Name="ESTADOS_VENTA" EntityType="Self.ESTADOS_VENTA" />
+    <EntitySet Name="GENERO" EntityType="Self.GENERO" />
+    <EntitySet Name="IMAGENES_PRODUCTO" EntityType="Self.IMAGENES_PRODUCTO" />
+    <EntitySet Name="IMAGENES_RESENA" EntityType="Self.IMAGENES_RESENA" />
+    <EntitySet Name="LISTA_DESEOS" EntityType="Self.LISTA_DESEOS" />
+    <EntitySet Name="METODOS_PAGO" EntityType="Self.METODOS_PAGO" />
+    <EntitySet Name="Productos" EntityType="Self.Productos" />
+    <EntitySet Name="PROVINCIAS" EntityType="Self.PROVINCIAS" />
+    <EntitySet Name="RESENAS" EntityType="Self.RESENAS" />
+    <EntitySet Name="SUBCATEGORIAS" EntityType="Self.SUBCATEGORIAS" />
+    <EntitySet Name="TALLAS" EntityType="Self.TALLAS" />
+    <EntitySet Name="TALLAS_PRODUCTO" EntityType="Self.TALLAS_PRODUCTO" />
+    <EntitySet Name="TIPO_EMVOLTURA" EntityType="Self.TIPO_EMVOLTURA" />
+    <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" />
+    <EntitySet Name="Ventas" EntityType="Self.Ventas" />
+    <EntitySet Name="PORTADA" EntityType="Self.PORTADA" />
+    <EntitySet Name="SECCIONES" EntityType="Self.SECCIONES" />
+    <EntitySet Name="TAGS" EntityType="Self.TAGS" />
+    <EntitySet Name="TIPO_PRODUCTO" EntityType="Self.TIPO_PRODUCTO" />
+    <AssociationSet Name="FK_AFILIADOS_USUARIOS" Association="Self.FK_AFILIADOS_USUARIOS">
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+      <End Role="AFILIADOS" EntitySet="AFILIADOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOS_BANCARIOS_AFILIADOS_AFILIADOS" Association="Self.FK_DATOS_BANCARIOS_AFILIADOS_AFILIADOS">
+      <End Role="AFILIADOS" EntitySet="AFILIADOS" />
+      <End Role="DATOS_BANCARIOS_AFILIADOS" EntitySet="DATOS_BANCARIOS_AFILIADOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VENTAS_ID_CODIGO_AFILIADO" Association="Self.FK_VENTAS_ID_CODIGO_AFILIADO">
+      <End Role="AFILIADOS" EntitySet="AFILIADOS" />
+      <End Role="Ventas" EntitySet="Ventas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CARRITO_COMPRAS_Productos" Association="Self.FK_CARRITO_COMPRAS_Productos">
+      <End Role="Productos" EntitySet="Productos" />
+      <End Role="CARRITO_COMPRAS" EntitySet="CARRITO_COMPRAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CARRITO_COMPRAS_USUARIOS" Association="Self.FK_CARRITO_COMPRAS_USUARIOS">
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+      <End Role="CARRITO_COMPRAS" EntitySet="CARRITO_COMPRAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ID_COLOR_CARRITO" Association="Self.FK_ID_COLOR_CARRITO">
+      <End Role="COLORES_PRODUCTO" EntitySet="COLORES_PRODUCTO" />
+      <End Role="CARRITO_COMPRAS" EntitySet="CARRITO_COMPRAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ID_TALLA" Association="Self.FK_ID_TALLA">
+      <End Role="TALLAS_PRODUCTO" EntitySet="TALLAS_PRODUCTO" />
+      <End Role="CARRITO_COMPRAS" EntitySet="CARRITO_COMPRAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SUBCATEGORIAS_CATEGORIAS" Association="Self.FK_SUBCATEGORIAS_CATEGORIAS">
+      <End Role="CATEGORIAS" EntitySet="CATEGORIAS" />
+      <End Role="SUBCATEGORIAS" EntitySet="SUBCATEGORIAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CIUDADES_PROVINCIAS" Association="Self.FK_CIUDADES_PROVINCIAS">
+      <End Role="PROVINCIAS" EntitySet="PROVINCIAS" />
+      <End Role="CIUDADES" EntitySet="CIUDADES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DIRECCIONES_CIUDADES" Association="Self.FK_DIRECCIONES_CIUDADES">
+      <End Role="CIUDADES" EntitySet="CIUDADES" />
+      <End Role="DIRECCIONES" EntitySet="DIRECCIONES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COD_DESCUENTO_SUBCATEGORIAS" Association="Self.FK_COD_DESCUENTO_SUBCATEGORIAS">
+      <End Role="SUBCATEGORIAS" EntitySet="SUBCATEGORIAS" />
+      <End Role="COD_DESCUENTO" EntitySet="COD_DESCUENTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VENTAS_ID_CODIGO_DESCUENTO" Association="Self.FK_VENTAS_ID_CODIGO_DESCUENTO">
+      <End Role="COD_DESCUENTO" EntitySet="COD_DESCUENTO" />
+      <End Role="Ventas" EntitySet="Ventas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DETALLE_COLECCION_COLECCIONES" Association="Self.FK_DETALLE_COLECCION_COLECCIONES">
+      <End Role="COLECCIONES" EntitySet="COLECCIONES" />
+      <End Role="DETALLE_COLECCION" EntitySet="DETALLE_COLECCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COLORES_PRODUCTO_COLORES" Association="Self.FK_COLORES_PRODUCTO_COLORES">
+      <End Role="COLORES" EntitySet="COLORES" />
+      <End Role="COLORES_PRODUCTO" EntitySet="COLORES_PRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COLORES_PRODUCTO_Productos" Association="Self.FK_COLORES_PRODUCTO_Productos">
+      <End Role="Productos" EntitySet="Productos" />
+      <End Role="COLORES_PRODUCTO" EntitySet="COLORES_PRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DEATALLE_VENTA_COLORES_PRODUCTO" Association="Self.FK_DEATALLE_VENTA_COLORES_PRODUCTO">
+      <End Role="COLORES_PRODUCTO" EntitySet="COLORES_PRODUCTO" />
+      <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DETALLE_CONJUNTO_CONJUNTO" Association="Self.FK_DETALLE_CONJUNTO_CONJUNTO">
+      <End Role="CONJUNTO" EntitySet="CONJUNTO" />
+      <End Role="DETALLE_CONJUNTO" EntitySet="DETALLE_CONJUNTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DETALLE_COLECCION_Productos" Association="Self.FK_DETALLE_COLECCION_Productos">
+      <End Role="Productos" EntitySet="Productos" />
+      <End Role="DETALLE_COLECCION" EntitySet="DETALLE_COLECCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DETALLE_CONJUNTO_Productos" Association="Self.FK_DETALLE_CONJUNTO_Productos">
+      <End Role="Productos" EntitySet="Productos" />
+      <End Role="DETALLE_CONJUNTO" EntitySet="DETALLE_CONJUNTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DETALLE_PERSONALIZADO_DEATALLE_VENTA" Association="Self.FK_DETALLE_PERSONALIZADO_DEATALLE_VENTA">
+      <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
+      <End Role="DETALLE_PERSONALIZADO" EntitySet="DETALLE_PERSONALIZADO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DETALLE_REGALO_TIPO_EMVOLTURA" Association="Self.FK_DETALLE_REGALO_TIPO_EMVOLTURA">
+      <End Role="TIPO_EMVOLTURA" EntitySet="TIPO_EMVOLTURA" />
+      <End Role="DETALLE_REGALO" EntitySet="DETALLE_REGALO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DETALLE_REGALO_Ventas" Association="Self.FK_DETALLE_REGALO_Ventas">
+      <End Role="Ventas" EntitySet="Ventas" />
+      <End Role="DETALLE_REGALO" EntitySet="DETALLE_REGALO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DEATALLE_VENTA_TALLAS_PRODUCTO" Association="Self.FK_DEATALLE_VENTA_TALLAS_PRODUCTO">
+      <End Role="TALLAS_PRODUCTO" EntitySet="TALLAS_PRODUCTO" />
+      <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DETALLE_ID_PRODUCTO" Association="Self.FK_DETALLE_ID_PRODUCTO">
+      <End Role="Productos" EntitySet="Productos" />
+      <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DETALLE_ID_VENTA" Association="Self.FK_DETALLE_ID_VENTA">
+      <End Role="Ventas" EntitySet="Ventas" />
+      <End Role="DETALLE_VENTA" EntitySet="DETALLE_VENTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DETALLES_PRODUCTO_Productos" Association="Self.FK_DETALLES_PRODUCTO_Productos">
+      <End Role="Productos" EntitySet="Productos" />
+      <End Role="DETALLES_PRODUCTO" EntitySet="DETALLES_PRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DIRECCIONES_USUARIOS" Association="Self.FK_DIRECCIONES_USUARIOS">
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+      <End Role="DIRECCIONES" EntitySet="DIRECCIONES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USUARIOS_DIRECCIONES" Association="Self.FK_USUARIOS_DIRECCIONES">
+      <End Role="DIRECCIONES" EntitySet="DIRECCIONES" />
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ventas_ESTADOS_ENVIOS" Association="Self.FK_Ventas_ESTADOS_ENVIOS">
+      <End Role="ESTADOS_ENVIOS" EntitySet="ESTADOS_ENVIOS" />
+      <End Role="Ventas" EntitySet="Ventas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ventas_ESTADOS_VENTA" Association="Self.FK_Ventas_ESTADOS_VENTA">
+      <End Role="ESTADOS_VENTA" EntitySet="ESTADOS_VENTA" />
+      <End Role="Ventas" EntitySet="Ventas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRODUCTOS_GENERO" Association="Self.FK_PRODUCTOS_GENERO">
+      <End Role="GENERO" EntitySet="GENERO" />
+      <End Role="Productos" EntitySet="Productos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USUARIOS_GENERO" Association="Self.FK_USUARIOS_GENERO">
+      <End Role="GENERO" EntitySet="GENERO" />
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IMAGENES_PRODUCTO_Productos" Association="Self.FK_IMAGENES_PRODUCTO_Productos">
+      <End Role="Productos" EntitySet="Productos" />
+      <End Role="IMAGENES_PRODUCTO" EntitySet="IMAGENES_PRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IMAGENES_RESENA_RESENAS" Association="Self.FK_IMAGENES_RESENA_RESENAS">
+      <End Role="RESENAS" EntitySet="RESENAS" />
+      <End Role="IMAGENES_RESENA" EntitySet="IMAGENES_RESENA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LISTA_DESEOS_Productos" Association="Self.FK_LISTA_DESEOS_Productos">
+      <End Role="Productos" EntitySet="Productos" />
+      <End Role="LISTA_DESEOS" EntitySet="LISTA_DESEOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LISTA_DESEOS_USUARIOS1" Association="Self.FK_LISTA_DESEOS_USUARIOS1">
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+      <End Role="LISTA_DESEOS" EntitySet="LISTA_DESEOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ventas_METODOS_PAGO" Association="Self.FK_Ventas_METODOS_PAGO">
+      <End Role="METODOS_PAGO" EntitySet="METODOS_PAGO" />
+      <End Role="Ventas" EntitySet="Ventas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Productos__ID_TI__7CA47C3F" Association="Self.FK__Productos__ID_TI__7CA47C3F">
+      <End Role="TIPO_PRODUCTO" EntitySet="TIPO_PRODUCTO" />
+      <End Role="Productos" EntitySet="Productos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TAGS__ID_PRO_PER__6A85CC04" Association="Self.FK__TAGS__ID_PRO_PER__6A85CC04">
+      <End Role="Productos" EntitySet="Productos" />
+      <End Role="TAGS" EntitySet="TAGS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRODUCTO_SECCION" Association="Self.FK_PRODUCTO_SECCION">
+      <End Role="SECCIONES" EntitySet="SECCIONES" />
+      <End Role="Productos" EntitySet="Productos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Productos_SUBCATEGORIAS1" Association="Self.FK_Productos_SUBCATEGORIAS1">
+      <End Role="SUBCATEGORIAS" EntitySet="SUBCATEGORIAS" />
+      <End Role="Productos" EntitySet="Productos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RESENAS_Productos" Association="Self.FK_RESENAS_Productos">
+      <End Role="Productos" EntitySet="Productos" />
+      <End Role="RESENAS" EntitySet="RESENAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TALLAS_PRODUCTO_Productos" Association="Self.FK_TALLAS_PRODUCTO_Productos">
+      <End Role="Productos" EntitySet="Productos" />
+      <End Role="TALLAS_PRODUCTO" EntitySet="TALLAS_PRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RESENAS_USUARIOS" Association="Self.FK_RESENAS_USUARIOS">
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+      <End Role="RESENAS" EntitySet="RESENAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TALLAS_PRODUCTO_TALLAS" Association="Self.FK_TALLAS_PRODUCTO_TALLAS">
+      <End Role="TALLAS" EntitySet="TALLAS" />
+      <End Role="TALLAS_PRODUCTO" EntitySet="TALLAS_PRODUCTO" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
